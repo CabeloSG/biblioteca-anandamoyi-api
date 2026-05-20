@@ -31,7 +31,9 @@ public class LivroEntity {
     )
     private Set<EdicaoLivroEntity> edicoes = new HashSet<>();
 
-    public LivroEntity() {}
+    public LivroEntity() {
+        this.ativo = true;
+    }
 
     // getters & setters
     public Long getId() { return id; }

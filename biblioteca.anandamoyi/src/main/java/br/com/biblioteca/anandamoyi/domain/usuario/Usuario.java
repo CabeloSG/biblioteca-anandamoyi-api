@@ -28,6 +28,19 @@ public class Usuario {
     }
 
     public static Usuario criar(String nome, String email, String senhaHash, Role role) {
+
+        if (nome == null || nome.isBlank())
+            throw new IllegalArgumentException("Nome inválido");
+
+        if (email == null || email.isBlank())
+            throw new IllegalArgumentException("Email inválido");
+
+        if (senhaHash == null || senhaHash.isBlank())
+            throw new IllegalArgumentException("Senha inválida");
+
+        if (role == null)
+            throw new IllegalArgumentException("Role obrigatória");
+
         return new Usuario(
                 null,
                 nome,
@@ -37,6 +50,7 @@ public class Usuario {
                 true
         );
     }
+
 
 
 
@@ -60,12 +74,20 @@ public class Usuario {
         return id;
     }
 
+    public void setId(Long id) {}
+
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {}
+
     public String getSenhaHash() {
         return senhaHash;
+    }
+
+    public void setSenhaHash(String senhaHash) {
+        this.senhaHash = senhaHash;
     }
 
     public Role getRole() {
@@ -75,5 +97,6 @@ public class Usuario {
     public String getNome() {
         return nome;
     }
+    public void setNome(String nome) {}
 
 }

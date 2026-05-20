@@ -26,7 +26,7 @@ public class EmprestimoController {
     }
 
 
-    @PutMapping("/emprestimos/{id}/devolver")
+    @PutMapping("/{id}/devolver")
     @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
     public ResponseEntity<Void> devolver(@PathVariable Long id) {
 
@@ -36,6 +36,7 @@ public class EmprestimoController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO','LEITOR')")
     public Page<EmprestimoResponseDTO> listar(
             @RequestParam(required = false) Long leitorId,
             @RequestParam(required = false) StatusFiltroEmprestimo status,

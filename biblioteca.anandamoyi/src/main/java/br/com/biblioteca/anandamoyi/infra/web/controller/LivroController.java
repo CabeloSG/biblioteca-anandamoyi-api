@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/livros")
@@ -59,7 +60,7 @@ public class LivroController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
     public ResponseEntity<LivroResponseDTO> criar(
-            @RequestBody CriarLivroRequest request
+            @Valid @RequestBody CriarLivroRequest request
     ) {
         LivroResponseDTO response = criarLivroUseCase.executar(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

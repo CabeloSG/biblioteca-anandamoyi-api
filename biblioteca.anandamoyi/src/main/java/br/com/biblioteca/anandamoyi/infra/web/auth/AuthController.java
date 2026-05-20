@@ -3,8 +3,9 @@ package br.com.biblioteca.anandamoyi.infra.web.auth;
 import br.com.biblioteca.anandamoyi.domain.repository.UsuarioRepository;
 import br.com.biblioteca.anandamoyi.domain.usuario.Usuario;
 import br.com.biblioteca.anandamoyi.infra.security.JwtService;
-import br.com.biblioteca.anandamoyi.infra.web.controller.LoginRequest;
-import br.com.biblioteca.anandamoyi.infra.web.controller.LoginResponse;
+import br.com.biblioteca.anandamoyi.infra.web.dto.LoginRequestDTO;
+import br.com.biblioteca.anandamoyi.infra.web.dto.LoginResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request) {
+    public LoginResponseDTO login(
+            @Valid @RequestBody LoginRequestDTO request
+    ) {
 
         Usuario usuario = usuarioRepository.buscarPorEmail(request.email())
                 .orElseThrow(() ->
@@ -39,7 +42,11 @@ public class AuthController {
                         )
                 );
 
-        if (!passwordEncoder.matches(request.senha(), usuario.getSenhaHash())) {
+        if (!passwordEncoder.matches(
+                request.senha(),
+                usuario.getSenhaHash()
+        )) {
+
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED,
                     "Usuário inexistente ou senha inválida"
@@ -48,6 +55,6 @@ public class AuthController {
 
         String token = jwtService.gerarToken(usuario);
 
-        return new LoginResponse(token);
+        return new LoginResponseDTO(token);
     }
 }

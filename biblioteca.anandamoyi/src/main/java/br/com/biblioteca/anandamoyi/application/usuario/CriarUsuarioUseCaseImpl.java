@@ -30,15 +30,15 @@ public class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
                 });
 
         String senhaHash = passwordEncoder.encode(command.senha());
-        Usuario usuario = new Usuario(
-                null,
+
+        Usuario usuario = Usuario.criar(
                 command.nome(),
                 command.email(),
-                passwordEncoder.encode(command.senha()),
-                command.role(),
-                command.ativo()
+                senhaHash,
+                command.role()
         );
 
         return usuarioRepository.salvar(usuario);
     }
 }
+

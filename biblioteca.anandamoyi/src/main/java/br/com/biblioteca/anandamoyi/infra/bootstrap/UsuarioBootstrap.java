@@ -4,10 +4,16 @@ import br.com.biblioteca.anandamoyi.domain.repository.UsuarioRepository;
 import br.com.biblioteca.anandamoyi.domain.enums.Role;
 import br.com.biblioteca.anandamoyi.domain.usuario.Usuario;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(
+        name = "app.bootstrap.enabled",
+        havingValue = "true",
+        matchIfMissing = false
+)
 public class UsuarioBootstrap implements CommandLineRunner {
 
     private final UsuarioRepository usuarioRepository;

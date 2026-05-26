@@ -1,68 +1,54 @@
 # 📚 Biblioteca Anandamoyi API
 
-API REST para gerenciamento de biblioteca desenvolvida com **Spring Boot**, utilizando **Clean Architecture**, autenticação **JWT** e controle de acesso por perfis (roles).
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Docker](https://img.shields.io/badge/Docker-enabled-2496ED)
+![JWT](https://img.shields.io/badge/Auth-JWT-black)
+![Tests](https://img.shields.io/badge/Tests-90-success)
+![Coverage](https://img.shields.io/badge/Coverage-70%25-brightgreen)
+![Build](https://img.shields.io/badge/Build-Passing-success)
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+# 📖 Sobre o Projeto
 
-- Java 17+
-- Spring Boot
-- Spring Security
-- JWT (JSON Web Token)
-- Spring Data JPA
-- H2 Database
-- Maven
-- Clean Architecture
+A **Biblioteca Anandamoyi API** é uma API REST para gerenciamento de biblioteca desenvolvida com **Java + Spring Boot**, utilizando princípios de **Clean Architecture**, autenticação com **JWT**, controle de empréstimos, devoluções e multas automáticas.
 
----
-
-## 🏗 Arquitetura
-
-O projeto foi estruturado seguindo princípios de **Clean Architecture**, com separação clara de responsabilidades:
-
-
-# 📚 Biblioteca API — Anandamoyi
-
-Sistema de gerenciamento de biblioteca desenvolvido com **Java + Spring Boot**, utilizando princípios de **Clean Architecture**, autenticação com **JWT**, controle de empréstimos, devoluções e multas automáticas.
-
-Projeto desenvolvido para estudos, portfólio e aprimoramento profissional, inspirado nos ensinamentos do Mestre Ramatis e nos princípios de organização, disciplina e evolução contínua através do conhecimento.
+Projeto desenvolvido para estudos, portfólio e aprimoramento profissional, inspirado nos ensinamentos do **Mestre Ramatis** e nos princípios de organização, disciplina e evolução contínua através do conhecimento.
 
 ---
 
 # 🚀 Tecnologias Utilizadas
 
-- Java 21
-- Spring Boot
-- Spring Security
-- JWT
-- Spring Data JPA
-- Hibernate
-- H2 Database
-- Maven
-- JUnit 5
-- MockMvc
+* Java 17
+* Spring Boot 3
+* Spring Security
+* JWT Authentication
+* Spring Data JPA
+* Hibernate
+* PostgreSQL
+* H2 Database
+* Maven
+* Docker
+* JUnit 5
+* Mockito
+* MockMvc
+* JaCoCo
+* Swagger / OpenAPI
 
 ---
 
 # 🏗️ Arquitetura
 
-O projeto foi desenvolvido utilizando os princípios da:
+O projeto foi estruturado seguindo princípios de:
 
-## ✅ Clean Architecture
+* Clean Architecture
+* SOLID
+* Separation of Concerns
+* RESTful API Design
 
 Separando responsabilidades em camadas independentes:
-
-```text
-domain
-application
-infra
-web
-```
-
----
-
-# 📂 Estrutura do Projeto
 
 ```text
 src/main/java/br/com/biblioteca/anandamoyi
@@ -88,70 +74,110 @@ src/main/java/br/com/biblioteca/anandamoyi
 
 ---
 
-# 🔐 Funcionalidades
+# 🔐 Segurança
 
-## ✅ Autenticação e Segurança
+A aplicação utiliza:
 
-- Login com JWT
-- Controle de acesso por Roles
-- Rotas protegidas
-- Filtro JWT customizado
-- Spring Security configurado por perfil de acesso
+* JWT Authentication
+* Spring Security
+* Controle de acesso por Roles
+* Endpoints protegidos
+* Filtro JWT customizado
+* Tratamento global de exceções
+
+Perfis disponíveis:
+
+* ADMIN
+* BIBLIOTECARIO
+* LEITOR
 
 ---
 
+# 🧪 Testes e Qualidade
+
+O projeto possui:
+
+✅ Testes unitários
+✅ Testes de controllers
+✅ Testes de integração
+✅ Testes de segurança
+✅ Cobertura de código com JaCoCo
+
+## 📊 Cobertura Atual
+
+* Instructions: 70%
+* Methods: 67%
+* Classes: 86%
+
+Gerar relatório:
+
+```bash
+mvn clean verify
+```
+
+Abrir relatório:
+
+```text
+target/site/jacoco/index.html
+```
+
+---
+
+# 📦 Funcionalidades
+
 ## 👤 Usuários
 
-- Cadastro de usuários
-- Perfis:
-    - ADMIN
-    - BIBLIOTECARIO
-    - LEITOR
-- Validação de email
-- Validação de senha
-- Controle de usuários ativos
+* Cadastro de usuários
+* Perfis:
+
+    * ADMIN
+    * BIBLIOTECARIO
+    * LEITOR
+* Validação de email
+* Validação de senha
+* Controle de usuários ativos
 
 ---
 
 ## 📚 Livros
 
-- Cadastro de livros
-- Cadastro de edições
-- Controle de exemplares
-- Disponibilidade automática
-- Busca por ID
-- Listagem completa
+* Cadastro de livros
+* Cadastro de edições
+* Controle de exemplares
+* Disponibilidade automática
+* Busca por ID
+* Listagem completa
 
 ---
 
 ## 🔄 Empréstimos
 
-- Empréstimo de exemplares
-- Controle de disponibilidade
-- Devolução de livros
-- Controle de empréstimos ativos
-- Controle de empréstimos devolvidos
-- Controle de empréstimos atrasados
-- Paginação
-- Filtros dinâmicos
+* Empréstimo de exemplares
+* Controle de disponibilidade
+* Devolução de livros
+* Controle de empréstimos ativos
+* Controle de empréstimos devolvidos
+* Controle de empréstimos atrasados
+* Paginação
+* Filtros dinâmicos
 
 ---
 
 ## 💰 Multas
 
-- Cálculo automático de multa
-- Controle de atraso
-- Registro automático da data de devolução
+* Cálculo automático de multa
+* Controle de atraso
+* Registro automático da data de devolução
 
 ---
 
 # 🔑 Roles do Sistema
 
-| Role | Permissões |
-|------|-------------|
-| ADMIN | Controle total do sistema |
+| Role          | Permissões                  |
+| ------------- | --------------------------- |
+| ADMIN         | Controle total do sistema   |
 | BIBLIOTECARIO | Gerenciamento da biblioteca |
-| LEITOR | Consulta e empréstimos |
+| LEITOR        | Consulta e empréstimos      |
 
 ---
 
@@ -171,6 +197,14 @@ POST /auth/login
 {
   "email": "admin@email.com",
   "senha": "123456"
+}
+```
+
+### Response
+
+```json
+{
+  "token": "jwt-token"
 }
 ```
 
@@ -293,137 +327,91 @@ GET /emprestimos?status=ATRASADO
 
 ---
 
-# ✅ Validações
+# 🐳 Docker
 
-O sistema possui validações para:
+Subir ambiente completo:
 
-- Campos obrigatórios
-- Email inválido
-- Senha mínima
-- Quantidade inválida
-- Role obrigatória
-- Dados inconsistentes
-
----
-
-# ⚠️ Tratamento de Erros
-
-A aplicação possui um `GlobalExceptionHandler` responsável por tratar:
-
-- 400 Bad Request
-- 401 Unauthorized
-- 403 Forbidden
-- 404 Not Found
-- Erros de validação
-- Regras de negócio
-
----
-
-# 🧪 Testes
-
-O projeto possui:
-
-## ✅ Testes Unitários
-- UseCases
-- Domain
-- DTOs
-- Mappers
-
-## ✅ Testes de Controller
-- MockMvc
-- Endpoints REST
-
-## ✅ Testes de Segurança
-- JWT
-- Roles
-- 401 Unauthorized
-- 403 Forbidden
-
----
-
-# 🗄️ Banco de Dados
-
-Atualmente o projeto utiliza:
-
-## ✅ H2 Database
-
-Console disponível em:
-
-```text
-http://localhost:8080/h2-console
+```bash
+docker-compose up -d
 ```
 
 ---
 
-# ▶️ Como Executar o Projeto
+# ⚙️ Variáveis de Ambiente
+
+Exemplo:
+
+```env
+DB_URL=jdbc:postgresql://localhost:5432/biblioteca
+DB_USERNAME=admin
+DB_PASSWORD=123456
+JWT_SECRET=segredo-super-seguro
+```
+
+---
+
+# ▶️ Executando o Projeto
 
 ## Clonar repositório
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/CabeloSG/biblioteca-anandamoyi-api.git
 ```
 
 ---
 
-## Entrar na pasta do projeto
+## Entrar na pasta
 
 ```bash
-cd biblioteca-api
+cd biblioteca-anandamoyi-api
 ```
 
 ---
 
-## Executar aplicação
-
-### Windows
+## Rodar aplicação
 
 ```bash
-mvnw spring-boot:run
-```
-
-### Linux / Mac
-
-```bash
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 ---
 
-# 🔥 Próximas Melhorias
+# 📑 Swagger
 
-- PostgreSQL
-- Docker
-- Swagger refinado
-- Deploy online
-- CI/CD
-- Logs centralizados
-- Observabilidade
-- Monitoramento
+Documentação disponível em:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+# 📌 CI/CD
+
+O projeto possui integração contínua com GitHub Actions.
+
+Pipeline automatizada:
+
+* Build
+* Testes
+* JaCoCo
+
+Arquivo:
+
+```text
+.github/workflows/ci.yml
+```
 
 ---
 
 # 👨‍💻 Autor
 
-Desenvolvido por **Leandro Gonçalves**.
+Desenvolvido por **Leandro Gonçalves**
+
+* GitHub: https://github.com/CabeloSG
 
 ---
 
-# 📖 Objetivo do Projeto
+# 📄 Licença
 
-Este projeto foi desenvolvido com foco em:
-
-- Estudos avançados em Backend Java
-- Boas práticas de arquitetura
-- APIs REST profissionais
-- Segurança com JWT
-- Clean Architecture
-- Portfólio profissional
-
----
-
-# ✨ Inspiração
-
-> “O conhecimento disciplina a mente e ilumina o espírito.”
-
-Projeto inspirado nos ensinamentos do Mestre Ramatis, valorizando evolução contínua, organização, responsabilidade e aprendizado através da tecnologia.
-
+Projeto desenvolvido para fins educacionais e portfólio profissional.

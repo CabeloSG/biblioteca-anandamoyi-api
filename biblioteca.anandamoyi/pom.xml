@@ -14,8 +14,12 @@
     <groupId>br.com.biblioteca.anandamoyi</groupId>
     <artifactId>biblioteca.anandamoyi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>biblioteca.anandamoyi</name>
-    <description>Sistema de gerenciamento de biblioteca</description>
+
+    <description>
+        Sistema de gerenciamento de biblioteca
+    </description>
 
     <properties>
         <java.version>17</java.version>
@@ -23,43 +27,51 @@
 
     <dependencies>
 
-        <!-- WEB -->
+        <!-- ================= WEB ================= -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JPA -->
+        <!-- ================= JPA ================= -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- SECURITY -->
+        <!-- ================= SECURITY ================= -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- VALIDATION -->
+        <!-- ================= VALIDATION ================= -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- MYSQL -->
+        <!-- ================= MYSQL ================= -->
+
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- H2 (TEST / DEV) -->
+        <!-- ================= H2 ================= -->
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- ================= POSTGRESQL ================= -->
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -67,14 +79,16 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- LOMBOK -->
+        <!-- ================= LOMBOK ================= -->
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- JWT -->
+        <!-- ================= JWT ================= -->
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -95,7 +109,8 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- SWAGGER -->
+        <!-- ================= SWAGGER ================= -->
+
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -116,14 +131,17 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- GARANTE JUNIT -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- GARANTE MOCKITO -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -133,59 +151,129 @@
     </dependencies>
 
     <build>
+
         <plugins>
 
-            <!-- COMPILER -->
+            <!-- ================= COMPILER ================= -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+
                 <configuration>
+
                     <annotationProcessorPaths>
+
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </path>
+
                     </annotationProcessorPaths>
+
                 </configuration>
+
             </plugin>
 
-            <!-- SPRING BOOT -->
+            <!-- ================= SPRING BOOT ================= -->
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
                 <configuration>
+
                     <excludes>
+
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
+
                     </excludes>
+
                 </configuration>
+
             </plugin>
 
+            <!-- ================= JACOCO ================= -->
+
             <plugin>
+
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+
                 <version>0.8.13</version>
 
+                <configuration>
+
+                    <excludes>
+
+                        <!-- CONFIG -->
+
+                        <exclude>**/config/**</exclude>
+
+                        <!-- DTO -->
+
+                        <exclude>**/dto/**</exclude>
+                        <exclude>**/web/dto/**</exclude>
+
+                        <!-- ENTITY -->
+
+                        <exclude>**/entity/**</exclude>
+
+                        <!-- ENUMS -->
+
+                        <exclude>**/enums/**</exclude>
+
+                        <!-- APPLICATION -->
+
+                        <exclude>**/*Application*</exclude>
+
+                        <!-- BOOTSTRAP -->
+
+                        <exclude>**/bootstrap/**</exclude>
+
+                        <!-- EXCEPTION -->
+
+                        <exclude>**/exception/**</exclude>
+
+                    </excludes>
+
+                </configuration>
+
                 <executions>
+
+                    <!-- INICIA O AGENTE -->
+
                     <execution>
+
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+
                     </execution>
 
+                    <!-- GERA RELATÓRIO -->
+
                     <execution>
+
                         <id>report</id>
+
                         <phase>verify</phase>
+
                         <goals>
                             <goal>report</goal>
                         </goals>
+
                     </execution>
+
                 </executions>
+
             </plugin>
 
         </plugins>
+
     </build>
 
 </project>

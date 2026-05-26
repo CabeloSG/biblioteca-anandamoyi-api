@@ -7,6 +7,7 @@ import br.com.biblioteca.anandamoyi.infra.web.dto.LoginRequestDTO;
 import br.com.biblioteca.anandamoyi.infra.web.dto.LoginResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO login(
+    public ResponseEntity<LoginResponseDTO> login(
             @Valid @RequestBody LoginRequestDTO request
     ) {
 
@@ -55,6 +56,8 @@ public class AuthController {
 
         String token = jwtService.gerarToken(usuario);
 
-        return new LoginResponseDTO(token);
+        LoginResponseDTO response = new LoginResponseDTO(token);
+
+        return ResponseEntity.ok(response);
     }
 }

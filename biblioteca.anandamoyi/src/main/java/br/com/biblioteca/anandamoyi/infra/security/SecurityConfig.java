@@ -1,5 +1,6 @@
 package br.com.biblioteca.anandamoyi.infra.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -17,12 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import jakarta.servlet.http.HttpServletResponse;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@Profile("!test")
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
@@ -38,20 +36,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         return http
 
-                //  DESABILITA CSRF (API REST)
+                // DESABILITA CSRF
                 .csrf(AbstractHttpConfigurer::disable)
 
-                //  SEM SESSÃO (JWT)
+                // JWT = STATELESS
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
-                //  REGRAS DE ACESSO
+                // REGRAS
                 .authorizeHttpRequests(auth -> auth
 
-                        //  ROTAS PUBLICAS
+                        // PUBLICO
                         .requestMatchers(
                                 "/auth/**",
                                 "/h2-console/**",
@@ -62,43 +61,55 @@ public class SecurityConfig {
                                 "/webjars/**"
                         ).permitAll()
 
-                        //  PERMITE CRIAR USUARIO (IMPORTANTE PARA TESTE)
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                        // CRIAR USUARIO
+                        .requestMatchers(HttpMethod.POST, "/usuarios")
+                        .permitAll()
 
-                        //  PROTEGIDO (PRECISA TOKEN)
-                        .requestMatchers("/usuarios/**").authenticated()
+                        // LIVROS - SOMENTE ADMIN
+                        .requestMatchers(HttpMethod.POST, "/livros")
+                        .hasRole("ADMIN")
 
-                        //  ADMIN
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        // ADMIN
+                        .requestMatchers("/admin/**")
+                        .hasRole("ADMIN")
 
-                        .anyRequest().authenticated()
+                        // USUARIOS
+                        .requestMatchers("/usuarios/**")
+                        .authenticated()
+
+                        // DEMAIS ROTAS
+                        .anyRequest()
+                        .authenticated()
                 )
 
-                //  TRATAMENTO CORRETO DOS ERROS
+                // TRATAMENTO 401 / 403
                 .exceptionHandling(ex -> ex
 
-                        // 🔐 401 - NÃO AUTENTICADO
                         .authenticationEntryPoint((request, response, authException) -> {
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             response.setContentType("application/json");
-                            response.getWriter().write("{\"error\":\"Não autenticado\"}");
+                            response.getWriter()
+                                    .write("{\"error\":\"Não autenticado\"}");
                         })
 
-                        // 🔐 403 - SEM PERMISSÃO (AccessDeniedException)
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
                             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             response.setContentType("application/json");
-                            response.getWriter().write("{\"error\":\"Acesso negado\"}");
+                            response.getWriter()
+                                    .write("{\"error\":\"Acesso negado\"}");
                         })
                 )
 
-                //  USER DETAILS
+                // USER DETAILS
                 .userDetailsService(userDetailsService)
 
-                //  JWT FILTER
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                // JWT FILTER
+                .addFilterBefore(
+                        jwtFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                )
 
-                //  H2 CONSOLE
+                // H2
                 .headers(headers ->
                         headers.frameOptions(frame -> frame.disable())
                 )
@@ -106,13 +117,7 @@ public class SecurityConfig {
                 .build();
     }
 
-    //  ENCODER
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    //  AUTH MANAGER
+    // AUTH MANAGER
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config

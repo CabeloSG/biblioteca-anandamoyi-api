@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ResponseEntity<?> handleNotFound(RecursoNaoEncontradoException ex) {
+
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(Map.of(
@@ -28,8 +30,27 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<Map<String, Object>> handleResponseStatusException(
+            ResponseStatusException ex
+    ) {
+
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("status", ex.getStatusCode().value());
+        body.put("error", ex.getReason());
+        body.put("timestamp", LocalDateTime.now());
+
+        return ResponseEntity
+                .status(ex.getStatusCode())
+                .body(body);
+    }
+
     @ExceptionHandler(AuthorizationDeniedException.class)
-    public ResponseEntity<?> handleAuthorizationDenied(AuthorizationDeniedException ex) {
+    public ResponseEntity<?> handleAuthorizationDenied(
+            AuthorizationDeniedException ex
+    ) {
+
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .body(Map.of(
@@ -40,15 +61,19 @@ public class GlobalExceptionHandler {
 
     // Livro não encontrado
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, Object>> handleRuntime(RuntimeException ex) {
+    public ResponseEntity<Map<String, Object>> handleRuntime(
+            RuntimeException ex
+    ) {
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                Map.of(
-                        "timestamp", LocalDateTime.now(),
-                        "status", 500,
-                        "error", ex.getMessage()
-                )
-        );
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(
+                        Map.of(
+                                "timestamp", LocalDateTime.now(),
+                                "status", 500,
+                                "error", ex.getMessage()
+                        )
+                );
     }
 
     // Regra de negócio (todos os livros da mesma edição está emprestado)
@@ -56,8 +81,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleExemplarIndisponivel(
             ExemplarInDisponivelException ex
     ) {
+
         return ResponseEntity
-                .status(HttpStatus.CONFLICT) //  409
+                .status(HttpStatus.CONFLICT)
                 .body(Map.of(
                         "status", 409,
                         "timestamp", LocalDateTime.now(),
@@ -67,20 +93,27 @@ public class GlobalExceptionHandler {
 
     // Regra de negócio (devolver sem emprestar)
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<Map<String, Object>> handleIllegalState(IllegalStateException ex) {
+    public ResponseEntity<Map<String, Object>> handleIllegalState(
+            IllegalStateException ex
+    ) {
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(
-                Map.of(
-                        "timestamp", LocalDateTime.now(),
-                        "status", 409,
-                        "error", ex.getMessage()
-                )
-        );
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(
+                        Map.of(
+                                "timestamp", LocalDateTime.now(),
+                                "status", 409,
+                                "error", ex.getMessage()
+                        )
+                );
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, Object> handleIllegalArgument(IllegalArgumentException ex) {
+    public Map<String, Object> handleIllegalArgument(
+            IllegalArgumentException ex
+    ) {
+
         return Map.of(
                 "message", ex.getMessage(),
                 "status", 400,
@@ -88,17 +121,22 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    @ExceptionHandler(
+            org.springframework.http.converter.HttpMessageNotReadableException.class
+    )
     public ResponseEntity<Map<String, Object>> handleJsonError(
             org.springframework.http.converter.HttpMessageNotReadableException ex
     ) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                Map.of(
-                        "status", 400,
-                        "timestamp", LocalDateTime.now(),
-                        "error", "JSON inválido"
-                )
-        );
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(
+                        Map.of(
+                                "status", 400,
+                                "timestamp", LocalDateTime.now(),
+                                "error", "JSON inválido"
+                        )
+                );
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -119,5 +157,4 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(erros);
     }
-
 }

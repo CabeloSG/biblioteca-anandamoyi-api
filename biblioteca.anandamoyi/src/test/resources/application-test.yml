@@ -1,18 +1,16 @@
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  datasourse:
-    url: jdbc:h2:mem:test-db
+  datasource:
+    url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
-    password: ""
+    password:
 
   jpa:
     hibernate:
-      dd1-auto: create-drop
-    show-sql: true
-    open-in-view: false
+      ddl-auto: create-drop
 
-  app:
-    bootstrap:
-      enabled: false
+    show-sql: false
+
+  h2:
+    console:
+      enabled: true

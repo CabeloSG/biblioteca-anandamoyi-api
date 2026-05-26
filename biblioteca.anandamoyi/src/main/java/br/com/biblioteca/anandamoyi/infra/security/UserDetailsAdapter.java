@@ -22,7 +22,12 @@ public class UserDetailsAdapter implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getRole().name()));
+
+        return List.of(
+                new SimpleGrantedAuthority(
+                        "ROLE_" + usuario.getRole().name()
+                )
+        );
     }
 
     @Override
@@ -35,9 +40,23 @@ public class UserDetailsAdapter implements UserDetails {
         return usuario.getEmail();
     }
 
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
-    @Override public boolean isEnabled() { return true; }
-}
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return usuario.isAtivo();
+    }
+}

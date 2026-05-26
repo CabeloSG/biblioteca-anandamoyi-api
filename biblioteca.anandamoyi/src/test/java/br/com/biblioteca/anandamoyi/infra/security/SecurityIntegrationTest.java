@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -17,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class SecurityIntegrationTest {
 
     @Autowired
@@ -37,7 +39,7 @@ class SecurityIntegrationTest {
     @BeforeEach
     void setup() {
 
-        // LIMPA BANCO
+        // LIMPA O BANCO
         usuarioRepository.deletarTodos();
 
         Usuario admin = new Usuario(
@@ -100,7 +102,7 @@ class SecurityIntegrationTest {
                 {
                   "titulo": "Livro Admin",
                   "autor": "Autor Admin",
-                  "codigoBN": "BN1000",
+                  "codigoBN": "BN1000_ADMIN",
                   "isbn": "9781111111111",
                   "edicao": "1",
                   "quantidadeExemplares": 2
@@ -111,6 +113,10 @@ class SecurityIntegrationTest {
                         .header("Authorization", "Bearer " + adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
+                .andDo(result -> {
+                    System.out.println("STATUS: " + result.getResponse().getStatus());
+                    System.out.println("BODY: " + result.getResponse().getContentAsString());
+                })
                 .andExpect(status().isCreated());
     }
 

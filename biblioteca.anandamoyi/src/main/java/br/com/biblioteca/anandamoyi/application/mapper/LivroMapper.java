@@ -10,11 +10,15 @@ public class LivroMapper {
     }
 
     public static LivroResponseDTO toResponse(Livro livro) {
+
         return new LivroResponseDTO(
                 livro.getId(),
                 livro.getTitulo(),
                 livro.getAutor(),
-                livro.getCodigoBN()
+                livro.getCodigoBN(),
+                livro.getIsbn(),
+                livro.getEdicao(),
+                livro.getQuantidadeExemplares()
         );
     }
 }

@@ -42,6 +42,8 @@ public class SecurityConfig {
                 // DESABILITA CSRF
                 .csrf(AbstractHttpConfigurer::disable)
 
+                .cors(cors -> {})
+
                 // JWT = STATELESS
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -49,6 +51,8 @@ public class SecurityConfig {
 
                 // REGRAS
                 .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // PUBLICO
                         .requestMatchers(

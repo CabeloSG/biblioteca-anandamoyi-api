@@ -1,14 +1,13 @@
-# Usa Java 17 (compatível com seu projeto)
 FROM eclipse-temurin:17-jdk-alpine
 
-# Pasta dentro do container
 WORKDIR /app
 
-# Copia o jar gerado
-COPY target/biblioteca.anandamoyi-0.0.1-SNAPSHOT.jar app.jar
+COPY . .
 
-# Porta da aplicação
+RUN chmod +x mvnw
+
+RUN ./mvnw clean package -DskipTests
+
 EXPOSE 8080
 
-# Comando para rodar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "target/biblioteca.anandamoyi-0.0.1-SNAPSHOT.jar"]

@@ -15,10 +15,17 @@ public final class LivroEntityMapper {
         if (livro == null) return null;
 
         LivroEntity entity = new LivroEntity();
+
         entity.setId(livro.getId());
         entity.setTitulo(livro.getTitulo());
         entity.setAutor(livro.getAutor());
         entity.setCodigoBN(livro.getCodigoBN());
+
+        entity.setIsbn(livro.getIsbn());
+        entity.setEdicao(livro.getEdicao());
+        entity.setQuantidadeExemplares(
+                livro.getQuantidadeExemplares()
+        );
 
         livro.getEdicoes().forEach(edicao -> {
             EdicaoLivroEntity edicaoEntity = toEntity(edicao, entity);

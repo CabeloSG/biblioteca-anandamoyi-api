@@ -34,9 +34,9 @@ public class LivroRepositoryImpl implements LivroRepository {
 
     @Override
     public List<Livro> listarTodos() {
-        return livroJpaRepository.findAll()
+        return livroJpaRepository.listarTodosComEdicoes()
                 .stream()
-                .map(LivroEntityMapper::toDomainSimples)
+                .map(LivroEntityMapper::toDomain)
                 .toList();
     }
 

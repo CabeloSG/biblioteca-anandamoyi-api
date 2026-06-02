@@ -35,4 +35,12 @@ public interface LivroJpaRepository extends JpaRepository<LivroEntity, Long> {
     """)
         Optional<LivroEntity> buscarPorExemplarId(@Param("exemplarId") Long exemplarId);
 
+    @Query("""
+    SELECT DISTINCT l
+    FROM LivroEntity l
+    LEFT JOIN FETCH l.edicoes e
+    LEFT JOIN FETCH e.exemplares
+""")
+    java.util.List<LivroEntity> listarTodosComEdicoes();
+
 }

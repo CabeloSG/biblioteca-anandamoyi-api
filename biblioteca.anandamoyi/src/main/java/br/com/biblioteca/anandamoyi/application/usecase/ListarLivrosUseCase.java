@@ -5,7 +5,6 @@ import br.com.biblioteca.anandamoyi.domain.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ListarLivrosUseCase {
@@ -23,7 +22,10 @@ public class ListarLivrosUseCase {
                         livro.getId(),
                         livro.getTitulo(),
                         livro.getAutor(),
-                        livro.getCodigoBN()
+                        livro.getCodigoBN(),
+                        livro.getIsbn(),
+                        livro.getEdicao(),
+                        livro.getQuantidadeExemplares()
                 ))
                 .toList();
     }

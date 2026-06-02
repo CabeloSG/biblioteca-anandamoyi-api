@@ -25,7 +25,17 @@ class ListarLivrosUseCaseTest {
     void deveListarLivros() {
 
         when(repository.listarTodos())
-                .thenReturn(List.of(new Livro(1L, "Titulo", "Autor", "123")));
+                .thenReturn(List.of(
+                        new Livro(
+                                1L,
+                                "Titulo",
+                                "Autor",
+                                "123",
+                                "9788535914849",
+                                1,
+                                5
+                        )
+                ));
 
         var resultado = useCase.executar();
 

@@ -30,7 +30,7 @@ class CriarLivroUseCaseTest {
                 "Robert Martin",
                 "123",
                 "ISBN-123",
-                "1ª edição",
+                "1",
                 2
         );
     }
@@ -73,7 +73,7 @@ class CriarLivroUseCaseTest {
         EdicaoLivro edicao = livroSalvo.getEdicoes().get(0);
 
         assertEquals("ISBN-123", edicao.getIsbn());
-        assertEquals("1ª edição", edicao.getEdicao());
+        assertEquals("1", edicao.getEdicao());
 
         // 🔥 valida loop de exemplares
         assertEquals(2, edicao.getExemplares().size());

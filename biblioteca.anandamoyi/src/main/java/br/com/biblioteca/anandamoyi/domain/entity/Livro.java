@@ -57,6 +57,18 @@ public class Livro {
         this.quantidadeExemplares = quantidadeExemplares;
     }
 
+    public Livro(
+            Long id,
+            String titulo,
+            String autor,
+            String codigoBN
+    ) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.codigoBN = codigoBN;
+    }
+
     // ======================
     // Regras de negócio
     // ======================
@@ -156,5 +168,7 @@ public class Livro {
         this.edicao = edicao;
         this.quantidadeExemplares = quantidadeExemplares;
     }
+
+
 
 }

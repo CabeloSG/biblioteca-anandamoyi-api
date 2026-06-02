@@ -5,6 +5,7 @@ public record EditarLivroRequest(
         String autor,
         String codigoBN,
         String isbn,
-        Integer edicao
+        Integer edicao,
+        Integer quantidadeExemplares
 ) {
 }

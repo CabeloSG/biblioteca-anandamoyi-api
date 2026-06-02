@@ -9,7 +9,14 @@ class LivroTest {
     @Test
     void deveAdicionarEdicao() {
 
-        Livro livro = new Livro("Titulo", "Autor", "123");
+        Livro livro = new Livro(
+                "Titulo",
+                "Autor",
+                "123",
+                null,
+                null,
+                null
+        );
 
         EdicaoLivro edicao = new EdicaoLivro("isbn", "1 ed", livro);
 
@@ -21,7 +28,15 @@ class LivroTest {
     @Test
     void deveBuscarExemplarPorId() {
 
-        Livro livro = new Livro("Titulo", "Autor", "123");
+        Livro livro = new Livro(
+                "Titulo",
+                "Autor",
+                "123",
+                null,
+                null,
+                null
+        );
+
         EdicaoLivro edicao = new EdicaoLivro("isbn", "1 ed", livro);
         edicao.setId(1L);
 
@@ -39,9 +54,18 @@ class LivroTest {
     @Test
     void deveLancarErroSeExemplarNaoEncontrado() {
 
-        Livro livro = new Livro("Titulo", "Autor", "123");
+        Livro livro = new Livro(
+                "Titulo",
+                "Autor",
+                "123",
+                null,
+                null,
+                null
+        );
 
-        assertThrows(RuntimeException.class,
-                () -> livro.buscarExemplarPorId(1L));
+        assertThrows(
+                RuntimeException.class,
+                () -> livro.buscarExemplarPorId(1L)
+        );
     }
 }

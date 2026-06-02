@@ -16,10 +16,18 @@ public class LivroEntity {
     private Long id;
 
     private String titulo;
+
     private String autor;
 
     @Column(unique = true)
     private String codigoBN;
+
+    @Column(unique = true)
+    private String isbn;
+
+    private Integer edicao;
+
+    private Integer quantidadeExemplares;
 
     @Column(nullable = false)
     private boolean ativo;
@@ -35,20 +43,67 @@ public class LivroEntity {
         this.ativo = true;
     }
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // GETTERS E SETTERS
 
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getAutor() { return autor; }
-    public void setAutor(String autor) { this.autor = autor; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getCodigoBN() { return codigoBN; }
-    public void setCodigoBN(String codigoBN) { this.codigoBN = codigoBN; }
+    public String getTitulo() {
+        return titulo;
+    }
 
-    public boolean isAtivo() { return ativo; }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getCodigoBN() {
+        return codigoBN;
+    }
+
+    public void setCodigoBN(String codigoBN) {
+        this.codigoBN = codigoBN;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Integer getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(Integer edicao) {
+        this.edicao = edicao;
+    }
+
+    public Integer getQuantidadeExemplares() {
+        return quantidadeExemplares;
+    }
+
+    public void setQuantidadeExemplares(Integer quantidadeExemplares) {
+        this.quantidadeExemplares = quantidadeExemplares;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
 
     public void ativar() {
         this.ativo = true;
@@ -58,5 +113,7 @@ public class LivroEntity {
         this.ativo = false;
     }
 
-    public Set<EdicaoLivroEntity> getEdicoes() { return edicoes; }
+    public Set<EdicaoLivroEntity> getEdicoes() {
+        return edicoes;
+    }
 }

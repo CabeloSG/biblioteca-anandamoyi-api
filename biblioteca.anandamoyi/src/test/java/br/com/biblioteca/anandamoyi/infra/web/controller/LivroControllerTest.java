@@ -81,7 +81,10 @@ class LivroControllerTest {
                 1L,
                 "Clean Code",
                 "Robert Martin",
-                "123"
+                "123",
+                "9780132350884",
+                1,
+                2
         );
 
         when(criarLivroUseCase.executar(any()))

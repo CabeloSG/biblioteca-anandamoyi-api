@@ -74,7 +74,10 @@ public final class LivroEntityMapper {
                 entity.getId(),
                 entity.getTitulo(),
                 entity.getAutor(),
-                entity.getCodigoBN()
+                entity.getCodigoBN(),
+                entity.getIsbn(),
+                entity.getEdicao(),
+                entity.getQuantidadeExemplares()
         );
     }
 
@@ -89,7 +92,10 @@ public final class LivroEntityMapper {
                 entity.getId(),
                 entity.getTitulo(),
                 entity.getAutor(),
-                entity.getCodigoBN()
+                entity.getCodigoBN(),
+                entity.getIsbn(),
+                entity.getEdicao(),
+                entity.getQuantidadeExemplares()
         );
 
         entity.getEdicoes().forEach(edicaoEntity -> {

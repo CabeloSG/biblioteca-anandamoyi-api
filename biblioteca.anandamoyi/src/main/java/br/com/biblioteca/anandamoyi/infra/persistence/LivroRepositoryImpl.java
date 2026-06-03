@@ -6,6 +6,7 @@ import br.com.biblioteca.anandamoyi.infra.persistence.entity.LivroEntity;
 import br.com.biblioteca.anandamoyi.infra.persistence.mapper.LivroEntityMapper;
 import br.com.biblioteca.anandamoyi.infra.persistence.repository.LivroJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +35,9 @@ public class LivroRepositoryImpl implements LivroRepository {
 
     @Override
     public List<Livro> listarTodos() {
-        return livroJpaRepository.listarTodosComEdicoes()
+        return livroJpaRepository.findAll(Sort.by("id"))
                 .stream()
-                .map(LivroEntityMapper::toDomain)
+                .map(LivroEntityMapper::toDomainSimples)
                 .toList();
     }
 

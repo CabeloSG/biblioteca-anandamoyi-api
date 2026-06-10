@@ -40,6 +40,14 @@ public class CriarLivroUseCase {
             throw new IllegalArgumentException("ISBN é obrigatório");
         }
 
+        if (livroRepository.existePorCodigoBN(request.codigoBN())) {
+            throw new IllegalArgumentException("Código BN já cadastrado");
+        }
+
+        if (livroRepository.existePorIsbn(request.isbn())) {
+            throw new IllegalArgumentException("ISBN já cadastrado");
+        }
+
         // ======================
         // Cria LIVRO (Aggregate Root)
         // ======================

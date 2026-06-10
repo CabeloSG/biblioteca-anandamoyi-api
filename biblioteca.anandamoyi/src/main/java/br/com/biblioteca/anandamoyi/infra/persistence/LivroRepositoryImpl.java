@@ -62,4 +62,15 @@ public class LivroRepositoryImpl implements LivroRepository {
     public void remover(Long id) {
         livroJpaRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existePorCodigoBN(String codigoBN) {
+        return livroJpaRepository.existsByCodigoBN(codigoBN);
+    }
+
+    @Override
+    public boolean existePorIsbn(String isbn) {
+        return livroJpaRepository.existsByIsbn(isbn);
+    }
+
 }

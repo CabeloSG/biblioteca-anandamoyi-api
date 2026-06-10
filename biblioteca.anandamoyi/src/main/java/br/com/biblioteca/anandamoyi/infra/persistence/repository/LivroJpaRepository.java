@@ -43,4 +43,8 @@ public interface LivroJpaRepository extends JpaRepository<LivroEntity, Long> {
 """)
     java.util.List<LivroEntity> listarTodosComEdicoes();
 
+    boolean existsByCodigoBN(String codigoBN);
+
+    boolean existsByIsbn(String isbn);
+
 }

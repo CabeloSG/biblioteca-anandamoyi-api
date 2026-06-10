@@ -20,4 +20,8 @@ public interface LivroRepository {
     boolean existePorId(Long id);
 
     void remover(Long id);
+
+    boolean existePorCodigoBN(String codigoBN);
+
+    boolean existePorIsbn(String isbn);
 }

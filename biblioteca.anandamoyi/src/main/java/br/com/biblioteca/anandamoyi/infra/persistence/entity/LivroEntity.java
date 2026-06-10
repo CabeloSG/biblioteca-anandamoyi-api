@@ -32,6 +32,9 @@ public class LivroEntity {
     @Column(nullable = false)
     private boolean ativo;
 
+    @Column(length = 1000)
+    private String imagemUrl;
+
     @OneToMany(
             mappedBy = "livro",
             cascade = CascadeType.ALL,
@@ -115,5 +118,13 @@ public class LivroEntity {
 
     public Set<EdicaoLivroEntity> getEdicoes() {
         return edicoes;
+    }
+
+    public String getImagemUrl() {
+        return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
 }

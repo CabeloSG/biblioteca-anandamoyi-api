@@ -16,6 +16,7 @@ class LivroExtraTest {
                 "123",
                 null,
                 null,
+                null,
                 null
         );
 
@@ -25,7 +26,8 @@ class LivroExtraTest {
                 "999",
                 "ISBN",
                 2,
-                10
+                10,
+                null
         );
 
         assertEquals("Novo", livro.getTitulo());
@@ -40,6 +42,7 @@ class LivroExtraTest {
                 "A",
                 "B",
                 "123",
+                null,
                 null,
                 null,
                 null

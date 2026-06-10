@@ -13,6 +13,7 @@ public class LivroResponseDTO {
     private String isbn;
     private Integer edicao;
     private Integer quantidadeExemplares;
+    private String imagemUrl;
 
     public LivroResponseDTO(
             Long id,
@@ -21,7 +22,8 @@ public class LivroResponseDTO {
             String codigoBN,
             String isbn,
             Integer edicao,
-            Integer quantidadeExemplares
+            Integer quantidadeExemplares,
+            String imagemUrl
     ) {
         this.id = id;
         this.titulo = titulo;
@@ -30,6 +32,7 @@ public class LivroResponseDTO {
         this.isbn = isbn;
         this.edicao = edicao;
         this.quantidadeExemplares = quantidadeExemplares;
+        this.imagemUrl = imagemUrl;
     }
 
     public static LivroResponseDTO from(Livro livro) {
@@ -41,7 +44,8 @@ public class LivroResponseDTO {
                 livro.getCodigoBN(),
                 livro.getIsbn(),
                 livro.getEdicao(),
-                livro.getQuantidadeExemplares()
+                livro.getQuantidadeExemplares(),
+                livro.getImagemUrl()
         );
     }
 
@@ -71,5 +75,9 @@ public class LivroResponseDTO {
 
     public Integer getQuantidadeExemplares() {
         return quantidadeExemplares;
+    }
+
+    public String getImagemUrl() {
+        return imagemUrl;
     }
 }

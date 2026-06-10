@@ -18,7 +18,8 @@ public class LivroMapper {
                 livro.getCodigoBN(),
                 livro.getIsbn(),
                 livro.getEdicao(),
-                livro.getQuantidadeExemplares()
+                livro.getQuantidadeExemplares(),
+                livro.getImagemUrl()
         );
     }
 }

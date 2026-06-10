@@ -58,7 +58,8 @@ public class CriarLivroUseCase {
                 request.codigoBN(),
                 request.isbn(),
                 Integer.valueOf(request.edicao()),
-                request.quantidadeExemplares()
+                request.quantidadeExemplares(),
+                request.imagemUrl()
         );
 
         // ======================
@@ -95,7 +96,8 @@ public class CriarLivroUseCase {
                 livroSalvo.getCodigoBN(),
                 livroSalvo.getIsbn(),
                 livroSalvo.getEdicao(),
-                livroSalvo.getQuantidadeExemplares()
+                livroSalvo.getQuantidadeExemplares(),
+                livroSalvo.getImagemUrl()
         );
     }
 }

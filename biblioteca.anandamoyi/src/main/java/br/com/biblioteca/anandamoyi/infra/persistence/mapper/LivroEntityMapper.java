@@ -22,6 +22,7 @@ public final class LivroEntityMapper {
         entity.setCodigoBN(livro.getCodigoBN());
 
         entity.setIsbn(livro.getIsbn());
+        entity.setImagemUrl(livro.getImagemUrl());
         entity.setEdicao(livro.getEdicao());
         entity.setQuantidadeExemplares(
                 livro.getQuantidadeExemplares()
@@ -84,7 +85,8 @@ public final class LivroEntityMapper {
                 entity.getCodigoBN(),
                 entity.getIsbn(),
                 entity.getEdicao(),
-                entity.getQuantidadeExemplares()
+                entity.getQuantidadeExemplares(),
+                entity.getImagemUrl()
         );
     }
 
@@ -102,7 +104,8 @@ public final class LivroEntityMapper {
                 entity.getCodigoBN(),
                 entity.getIsbn(),
                 entity.getEdicao(),
-                entity.getQuantidadeExemplares()
+                entity.getQuantidadeExemplares(),
+                entity.getImagemUrl()
         );
 
         entity.getEdicoes().forEach(edicaoEntity -> {

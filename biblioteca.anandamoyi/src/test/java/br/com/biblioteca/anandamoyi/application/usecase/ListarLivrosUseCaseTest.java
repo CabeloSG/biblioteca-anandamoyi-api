@@ -33,7 +33,8 @@ class ListarLivrosUseCaseTest {
                                 "123",
                                 "9788535914849",
                                 1,
-                                5
+                                5,
+                                "https://teste.com/capa.jpg"
                         )
                 ));
 

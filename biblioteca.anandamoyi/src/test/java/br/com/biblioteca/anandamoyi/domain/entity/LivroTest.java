@@ -15,6 +15,7 @@ class LivroTest {
                 "123",
                 null,
                 null,
+                null,
                 null
         );
 
@@ -32,6 +33,7 @@ class LivroTest {
                 "Titulo",
                 "Autor",
                 "123",
+                null,
                 null,
                 null,
                 null
@@ -58,6 +60,7 @@ class LivroTest {
                 "Titulo",
                 "Autor",
                 "123",
+                null,
                 null,
                 null,
                 null

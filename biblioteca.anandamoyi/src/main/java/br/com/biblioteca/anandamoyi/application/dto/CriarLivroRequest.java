@@ -17,6 +17,8 @@ public record CriarLivroRequest(
         @NotBlank(message = "ISBN obrigatório")
         String isbn,
 
+        String imagemUrl,
+
         @NotBlank(message = "Edição obrigatória")
         String edicao,
 

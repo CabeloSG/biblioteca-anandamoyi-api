@@ -28,7 +28,8 @@ public class EditarLivroUseCase {
                 request.codigoBN(),
                 request.isbn(),
                 Integer.valueOf(request.edicao()),
-                request.quantidadeExemplares()
+                request.quantidadeExemplares(),
+                request.imagemUrl()
 
         );
 
@@ -41,7 +42,8 @@ public class EditarLivroUseCase {
                 salvo.getCodigoBN(),
                 salvo.getIsbn(),
                 salvo.getEdicao(),
-                salvo.getQuantidadeExemplares()
+                salvo.getQuantidadeExemplares(),
+                salvo.getImagemUrl()
         );
     }
 }

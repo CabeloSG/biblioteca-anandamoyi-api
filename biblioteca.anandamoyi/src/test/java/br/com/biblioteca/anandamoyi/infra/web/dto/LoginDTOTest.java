@@ -30,6 +30,7 @@ class LoginDTOTest {
                 "Autor",
                 "123",
                 "ISBN",
+                null,
                 "1ª",
                 2
         );

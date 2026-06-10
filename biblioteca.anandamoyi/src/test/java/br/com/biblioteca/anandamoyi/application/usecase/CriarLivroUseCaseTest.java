@@ -30,6 +30,7 @@ class CriarLivroUseCaseTest {
                 "Robert Martin",
                 "123",
                 "ISBN-123",
+                "https://teste.com/capa.jpg",
                 "1",
                 2
         );
@@ -105,7 +106,13 @@ class CriarLivroUseCaseTest {
     @Test
     void deveLancarErroQuandoQuantidadeInvalida() {
         CriarLivroRequest request = new CriarLivroRequest(
-                "Clean Code", "Robert", "123", "ISBN", "1", 0
+                "Clean Code",
+                "Robert",
+                "123",
+                "ISBN",
+                null,
+                "1",
+                0
         );
 
         assertThrows(IllegalArgumentException.class,
@@ -115,7 +122,13 @@ class CriarLivroUseCaseTest {
     @Test
     void deveLancarErroQuandoCodigoBNeISBNNulos() {
         CriarLivroRequest request = new CriarLivroRequest(
-                "Clean Code", "Robert", null, null, "1", 1
+                "Clean Code",
+                "Robert",
+                "123",
+                "ISBN",
+                null,
+                "",
+                1
         );
 
         assertThrows(IllegalArgumentException.class,
@@ -125,7 +138,13 @@ class CriarLivroUseCaseTest {
     @Test
     void deveLancarErroQuandoEdicaoVazia() {
         CriarLivroRequest request = new CriarLivroRequest(
-                "Clean Code", "Robert", "123", "ISBN", "", 1
+                "Clean Code",
+                "Robert",
+                "123",
+                "",
+                null,
+                "1",
+                1
         );
 
         assertThrows(IllegalArgumentException.class,
@@ -135,7 +154,13 @@ class CriarLivroUseCaseTest {
     @Test
     void deveLancarErroQuandoIsbnVazio() {
         CriarLivroRequest request = new CriarLivroRequest(
-                "Clean Code", "Robert", "123", "", "1", 1
+                "Clean Code",
+                "Robert",
+                "123",
+                "",
+                null,
+                "1",
+                1
         );
 
         assertThrows(IllegalArgumentException.class,

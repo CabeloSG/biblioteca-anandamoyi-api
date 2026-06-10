@@ -16,6 +16,7 @@ public class Livro {
     private String isbn;
     private Integer edicao;
     private Integer quantidadeExemplares;
+    private String imagemUrl;
 
     private final List<EdicaoLivro> edicoes = new ArrayList<>();
 
@@ -29,7 +30,8 @@ public class Livro {
             String codigoBN,
             String isbn,
             Integer edicao,
-            Integer quantidadeExemplares
+            Integer quantidadeExemplares,
+            String imagemUrl
     ) {
         this.titulo = titulo;
         this.autor = autor;
@@ -37,6 +39,7 @@ public class Livro {
         this.isbn = isbn;
         this.edicao = edicao;
         this.quantidadeExemplares = quantidadeExemplares;
+        this.imagemUrl = imagemUrl;
     }
 
     public Livro(
@@ -46,7 +49,8 @@ public class Livro {
             String codigoBN,
             String isbn,
             Integer edicao,
-            Integer quantidadeExemplares
+            Integer quantidadeExemplares,
+            String imagemUrl
     ) {
         this.id = id;
         this.titulo = titulo;
@@ -55,6 +59,7 @@ public class Livro {
         this.isbn = isbn;
         this.edicao = edicao;
         this.quantidadeExemplares = quantidadeExemplares;
+        this.imagemUrl = imagemUrl;
     }
 
     public Livro(
@@ -113,6 +118,14 @@ public class Livro {
         return edicoes;
     }
 
+    public String getImagemUrl() {
+        return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
+    }
+
     // ======================
     // Empréstimos
     // ======================
@@ -159,7 +172,8 @@ public class Livro {
             String codigoBN,
             String isbn,
             Integer edicao,
-            Integer quantidadeExemplares
+            Integer quantidadeExemplares,
+            String imagemUrl
     ) {
         this.titulo = titulo;
         this.autor = autor;
@@ -167,6 +181,7 @@ public class Livro {
         this.isbn = isbn;
         this.edicao = edicao;
         this.quantidadeExemplares = quantidadeExemplares;
+        this.imagemUrl = imagemUrl;
     }
 
 

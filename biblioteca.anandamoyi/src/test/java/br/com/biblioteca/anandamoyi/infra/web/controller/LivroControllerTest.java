@@ -73,6 +73,7 @@ class LivroControllerTest {
                 "Robert Martin",
                 "123",
                 "ISBN",
+                "https://teste.com/capa.jpg",
                 "1ª edição",
                 2
         );
@@ -84,7 +85,8 @@ class LivroControllerTest {
                 "123",
                 "9780132350884",
                 1,
-                2
+                2,
+                "https://teste.com/capa.jpg"
         );
 
         when(criarLivroUseCase.executar(any()))

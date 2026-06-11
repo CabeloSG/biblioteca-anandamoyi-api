@@ -4,6 +4,7 @@ import br.com.biblioteca.anandamoyi.application.dto.*;
 import br.com.biblioteca.anandamoyi.application.usecase.*;
 import br.com.biblioteca.anandamoyi.infra.security.JwtFilter;
 import br.com.biblioteca.anandamoyi.infra.security.JwtService;
+import br.com.biblioteca.anandamoyi.infra.storage.UploadImagemService;
 import br.com.biblioteca.anandamoyi.infra.web.exception.GlobalExceptionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,9 @@ class LivroControllerTest {
 
     @MockBean
     private ExcluirLivroUseCase excluirLivroUseCase;
+
+    @MockBean
+    private UploadImagemService uploadImagemService;
 
     @Autowired
     private ObjectMapper objectMapper;

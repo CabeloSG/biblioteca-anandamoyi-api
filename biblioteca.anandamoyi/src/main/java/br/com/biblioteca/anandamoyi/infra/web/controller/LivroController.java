@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import br.com.biblioteca.anandamoyi.infra.storage.UploadImagemService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import jakarta.validation.Valid;
@@ -20,6 +22,7 @@ public class LivroController {
     private final EmprestarExemplarUseCase emprestarExemplarUseCase;
     private final EditarLivroUseCase editarLivroUseCase;
     private final ExcluirLivroUseCase excluirLivroUseCase;
+    private final UploadImagemService uploadImagemService;
 
 
 
@@ -29,7 +32,8 @@ public class LivroController {
             BuscarLivroPorIdUseCase buscarLivroPorIdUseCase,
             EmprestarExemplarUseCase emprestarExemplarUseCase,
             EditarLivroUseCase editarLivroUseCase,
-            ExcluirLivroUseCase excluirLivroUseCase
+            ExcluirLivroUseCase excluirLivroUseCase,
+            UploadImagemService uploadImagemService
     ) {
         this.criarLivroUseCase = criarLivroUseCase;
         this.listarLivrosUseCase = listarLivrosUseCase;
@@ -37,6 +41,7 @@ public class LivroController {
         this.emprestarExemplarUseCase = emprestarExemplarUseCase;
         this.editarLivroUseCase = editarLivroUseCase;
         this.excluirLivroUseCase = excluirLivroUseCase;
+        this.uploadImagemService = uploadImagemService;
     }
 
 
@@ -96,6 +101,17 @@ public class LivroController {
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         excluirLivroUseCase.executar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/upload-capa")
+    @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
+    public ResponseEntity<String> uploadCapa(
+            @RequestParam("arquivo") MultipartFile arquivo
+    ) {
+
+        String url = uploadImagemService.salvar(arquivo);
+
+        return ResponseEntity.ok(url);
     }
 
 

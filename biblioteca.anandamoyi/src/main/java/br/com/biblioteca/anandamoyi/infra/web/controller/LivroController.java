@@ -103,10 +103,13 @@ public class LivroController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/upload-capa")
+    @PostMapping(
+            value = "/upload-capa",
+            consumes = {"multipart/form-data"}
+    )
     @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
     public ResponseEntity<String> uploadCapa(
-            @RequestParam("arquivo") MultipartFile arquivo
+            @RequestPart("arquivo") MultipartFile arquivo
     ) {
 
         String url = uploadImagemService.salvar(arquivo);

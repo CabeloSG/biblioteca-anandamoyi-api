@@ -60,7 +60,8 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/uploads/**"
+                                "/uploads/**",
+                                "/livros/teste-arquivo"
                         ).permitAll()
 
                         // CRIAR USUARIO

@@ -117,5 +117,19 @@ public class LivroController {
         return ResponseEntity.ok(url);
     }
 
+    @GetMapping("/teste-arquivo")
+    public ResponseEntity<String> testeArquivo() {
+
+        java.io.File file = new java.io.File(
+                "uploads/livros/d59a5303-bd86-485e-affa-6a605d2760a1.jpeg"
+        );
+
+        if (file.exists()) {
+            return ResponseEntity.ok("EXISTE");
+        }
+
+        return ResponseEntity.ok("NAO EXISTE");
+    }
+
 
 }

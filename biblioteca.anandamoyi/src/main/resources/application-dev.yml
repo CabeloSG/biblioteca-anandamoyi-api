@@ -12,5 +12,10 @@ spring:
     show-sql: true
     open-in-view: false
 
+cloudinary:
+  cloud-name: dtkq0w2ft
+  api-key: SUA_API_KEY
+  api-secret: SEU_API_SECRET
+
 server:
   port: 8080

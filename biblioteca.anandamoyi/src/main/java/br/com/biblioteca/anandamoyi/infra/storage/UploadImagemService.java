@@ -31,8 +31,10 @@ public class UploadImagemService {
 
         } catch (Exception e) {
 
+            e.printStackTrace();
+
             throw new RuntimeException(
-                    "Erro ao enviar imagem para Cloudinary",
+                    e.getMessage(),
                     e
             );
         }

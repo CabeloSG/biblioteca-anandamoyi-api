@@ -10,6 +10,7 @@ import br.com.biblioteca.anandamoyi.infra.storage.UploadImagemService;
 import org.springframework.web.multipart.MultipartFile;
 import br.com.biblioteca.anandamoyi.infra.web.livro.CriarLivroMultipartRequest;
 
+
 import java.util.List;
 import jakarta.validation.Valid;
 
@@ -24,6 +25,7 @@ public class LivroController {
     private final EditarLivroUseCase editarLivroUseCase;
     private final ExcluirLivroUseCase excluirLivroUseCase;
     private final UploadImagemService uploadImagemService;
+    private final AtualizarCapaLivroUseCase atualizarCapaLivroUseCase;
 
 
 
@@ -34,7 +36,8 @@ public class LivroController {
             EmprestarExemplarUseCase emprestarExemplarUseCase,
             EditarLivroUseCase editarLivroUseCase,
             ExcluirLivroUseCase excluirLivroUseCase,
-            UploadImagemService uploadImagemService
+            UploadImagemService uploadImagemService,
+            AtualizarCapaLivroUseCase atualizarCapaLivroUseCase
     ) {
         this.criarLivroUseCase = criarLivroUseCase;
         this.listarLivrosUseCase = listarLivrosUseCase;
@@ -43,6 +46,7 @@ public class LivroController {
         this.editarLivroUseCase = editarLivroUseCase;
         this.excluirLivroUseCase = excluirLivroUseCase;
         this.uploadImagemService = uploadImagemService;
+        this.atualizarCapaLivroUseCase = atualizarCapaLivroUseCase;
     }
 
 
@@ -171,6 +175,28 @@ public class LivroController {
         }
 
         return ResponseEntity.ok("NAO EXISTE");
+    }
+
+    @PutMapping(
+            value = "/{id}/capa",
+            consumes = {"multipart/form-data"}
+    )
+    @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
+    public ResponseEntity<LivroResponseDTO> atualizarCapa(
+            @PathVariable Long id,
+            @RequestPart("arquivo") MultipartFile arquivo
+    ) {
+
+        String imagemUrl =
+                uploadImagemService.salvar(arquivo);
+
+        LivroResponseDTO response =
+                atualizarCapaLivroUseCase.executar(
+                        id,
+                        imagemUrl
+                );
+
+        return ResponseEntity.ok(response);
     }
 
 

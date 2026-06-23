@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import br.com.biblioteca.anandamoyi.infra.storage.UploadImagemService;
 import org.springframework.web.multipart.MultipartFile;
+import br.com.biblioteca.anandamoyi.infra.web.livro.CriarLivroMultipartRequest;
 
 import java.util.List;
 import jakarta.validation.Valid;
@@ -115,6 +116,47 @@ public class LivroController {
         String url = uploadImagemService.salvar(arquivo);
 
         return ResponseEntity.ok(url);
+    }
+
+    @PostMapping(
+            value = "/com-capa",
+            consumes = {"multipart/form-data"}
+    )
+    @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
+    public ResponseEntity<LivroResponseDTO> criarComCapa(
+            @ModelAttribute CriarLivroMultipartRequest request
+    ) {
+
+        String imagemUrl = null;
+
+        if (request.getArquivo() != null &&
+                !request.getArquivo().isEmpty()) {
+
+            imagemUrl =
+                    uploadImagemService.salvar(
+                            request.getArquivo()
+                    );
+        }
+
+        CriarLivroRequest criarLivroRequest =
+                new CriarLivroRequest(
+                        request.getTitulo(),
+                        request.getAutor(),
+                        request.getCodigoBN(),
+                        request.getIsbn(),
+                        imagemUrl,
+                        request.getEdicao(),
+                        request.getQuantidadeExemplares()
+                );
+
+        LivroResponseDTO response =
+                criarLivroUseCase.executar(
+                        criarLivroRequest
+                );
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
 
     @GetMapping("/teste-arquivo")

@@ -8,6 +8,7 @@ public class CriarLivroWebRequest {
     private String isbn;
     private String edicao;
     private int quantidadeExemplares;
+    private String imagemUrl;
 
     public String getTitulo() { return titulo; }
     public String getAutor() { return autor; }
@@ -15,4 +16,6 @@ public class CriarLivroWebRequest {
     public String getIsbn() { return isbn; }
     public String getEdicao() { return edicao; }
     public int getQuantidadeExemplares() { return quantidadeExemplares; }
+    public String getImagemUrl() { return imagemUrl;
+    }
 }

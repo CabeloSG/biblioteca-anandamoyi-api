@@ -11,17 +11,27 @@ public class LivroDetalhadoResponseDTO {
     private Long id;
     private String titulo;
     private String autor;
+    private String codigoBN;
+    private String isbn;
+    private String imagemUrl;
+
     private List<EdicaoResponseDTO> edicoes;
 
     public LivroDetalhadoResponseDTO(
             Long id,
             String titulo,
             String autor,
+            String codigoBN,
+            String isbn,
+            String imagemUrl,
             List<EdicaoResponseDTO> edicoes
     ) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
+        this.codigoBN = codigoBN;
+        this.isbn = isbn;
+        this.imagemUrl = imagemUrl;
         this.edicoes = edicoes;
     }
 
@@ -32,6 +42,9 @@ public class LivroDetalhadoResponseDTO {
                 livro.getId(),
                 livro.getTitulo(),
                 livro.getAutor(),
+                livro.getCodigoBN(),
+                livro.getIsbn(),
+                livro.getImagemUrl(),
                 livro.getEdicoes().stream()
                         .map(edicao -> new EdicaoResponseDTO(
                                 edicao.getId(),
@@ -39,7 +52,6 @@ public class LivroDetalhadoResponseDTO {
                                 edicao.getEdicao(),
                                 edicao.getExemplares().stream()
                                         .map(ExemplarResumoResponseDTO::from)
-                                        //.map(ExemplarResumoMapper::toResumoDTO)
                                         .toList()
                         ))
                         .toList()
@@ -60,5 +72,17 @@ public class LivroDetalhadoResponseDTO {
 
     public List<EdicaoResponseDTO> getEdicoes() {
         return edicoes;
+    }
+
+    public String getCodigoBN() {
+        return codigoBN;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getImagemUrl() {
+        return imagemUrl;
     }
 }

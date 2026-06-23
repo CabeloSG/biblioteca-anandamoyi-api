@@ -135,6 +135,9 @@ class LivroControllerTest {
                         1L,
                         "Clean Code",
                         "Robert Martin",
+                        "BN123",
+                        "9780132350884",
+                        "https://teste.com/capa.jpg",
                         List.of()
                 );
 

@@ -26,6 +26,7 @@ public class LivroController {
     private final ExcluirLivroUseCase excluirLivroUseCase;
     private final UploadImagemService uploadImagemService;
     private final AtualizarCapaLivroUseCase atualizarCapaLivroUseCase;
+    private final RemoverCapaLivroUseCase removerCapaLivroUseCase;
 
 
 
@@ -37,7 +38,8 @@ public class LivroController {
             EditarLivroUseCase editarLivroUseCase,
             ExcluirLivroUseCase excluirLivroUseCase,
             UploadImagemService uploadImagemService,
-            AtualizarCapaLivroUseCase atualizarCapaLivroUseCase
+            AtualizarCapaLivroUseCase atualizarCapaLivroUseCase,
+            RemoverCapaLivroUseCase removerCapaLivroUseCase
     ) {
         this.criarLivroUseCase = criarLivroUseCase;
         this.listarLivrosUseCase = listarLivrosUseCase;
@@ -47,6 +49,7 @@ public class LivroController {
         this.excluirLivroUseCase = excluirLivroUseCase;
         this.uploadImagemService = uploadImagemService;
         this.atualizarCapaLivroUseCase = atualizarCapaLivroUseCase;
+        this.removerCapaLivroUseCase = removerCapaLivroUseCase;
     }
 
 
@@ -199,5 +202,15 @@ public class LivroController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/{id}/capa")
+    @PreAuthorize("hasAnyRole('ADMIN','BIBLIOTECARIO')")
+    public ResponseEntity<LivroResponseDTO> removerCapa(
+            @PathVariable Long id
+    ) {
+
+        return ResponseEntity.ok(
+                removerCapaLivroUseCase.executar(id)
+        );
+    }
 
 }

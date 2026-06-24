@@ -35,7 +35,8 @@ public class LivroRepositoryImpl implements LivroRepository {
 
     @Override
     public List<Livro> listarTodos() {
-        return livroJpaRepository.findAll(Sort.by("id"))
+        return livroJpaRepository
+                .findByAtivoTrueOrderByIdAsc()
                 .stream()
                 .map(LivroEntityMapper::toDomainSimples)
                 .toList();

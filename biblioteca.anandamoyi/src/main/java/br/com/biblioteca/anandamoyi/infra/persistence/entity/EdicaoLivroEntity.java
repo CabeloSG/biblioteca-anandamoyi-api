@@ -25,7 +25,8 @@ public class EdicaoLivroEntity {
 
     @OneToMany(
             mappedBy = "edicao",
-            cascade = CascadeType.PERSIST
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private Set<ExemplarLivroEntity> exemplares = new HashSet<>();
 

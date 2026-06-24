@@ -66,6 +66,12 @@ class LivroControllerTest {
     @MockBean
     private UploadImagemService uploadImagemService;
 
+    @MockBean
+    private AtualizarCapaLivroUseCase atualizarCapaLivroUseCase;
+
+    @MockBean
+    private RemoverCapaLivroUseCase removerCapaLivroUseCase;
+
     @Autowired
     private ObjectMapper objectMapper;
 
